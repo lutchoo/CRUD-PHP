@@ -6,13 +6,15 @@
 .custom-font {
     font-family: 'generalSans', sans-serif; /* Utilisez le nom défini dans font-family */
 }
+body, h1, label, span{
+    font-family: "generalSans", sans-serif;
+}
 
 
 header{
-    font-family: "generalsans";
+    font-family: "generalSans" , sans-serif;
     width: 100%;
     height: 100px;
-    
     top: 0;
     left: 0;
     border-bottom: 4px solid #4D03A6;
@@ -33,6 +35,10 @@ nav{
     padding: 15px;
     width: 50%;
 }
+.sous_menu{
+    display: none;
+}
+
 nav ul{
     width: 100%;
 }

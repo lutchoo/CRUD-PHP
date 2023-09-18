@@ -7,15 +7,18 @@ if(isset($_POST)&& !empty($_POST)){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    signIn($name,$email,$password);
+    $password_hash = password_hash($password,PASSWORD_DEFAULT);
+    signIn($name,$email,$password_hash);
 }
 ?>
 
 <main class='container'>
+ 
+<h1 class="text-center">INSCRIPTION</h1>
 <form action="signIn.php" method ="POST">
     <div>
         <label for="exampleFormControlInput1" class="form-label">Name</label>
-        <input class="form-control" type="text"  aria-label="Disabled input example" name='name'>
+        <input class="form-control" type="text" name='name'>
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
