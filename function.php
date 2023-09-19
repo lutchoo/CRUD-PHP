@@ -10,8 +10,6 @@ function dbConnect(){
     }
 }
 
-
-
 function signIn($name,$email,$password){
     $connect = dbConnect();
     $sanitized_email= filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -53,7 +51,6 @@ function logIn($email, $password){
         }else{
             
             if(password_verify($password, $user['password'])){
-                echo 'utilisateur connecte';
                 session_start();
                 $_SESSION['user_id'] = $user['auteur_id'];
                 $_SESSION['user_email'] = $user['email'];
@@ -79,12 +76,12 @@ function getArticles(){
 
 function getArticleById($id){
     $connect = dbConnect();
-    $stmt = $connect->prepare("SELECT * FROM articles JOIN auteurs ON articles.`id-auteur` = auteurs.auteur_id WHERE articles.article_id = $id ");
+    $stmt = $connect->prepare("SELECT * FROM articles JOIN auteurs ON articles.`id-auteur` = auteurs.auteur_id WHERE articles.article_id = :id ");
+    $stmt->bindParam(':id',$id);
     $stmt->execute();
     $oneArticle = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $oneArticle;
 }
-
 
 function addArticle($titre,$img,$text,$date,$autor){
     $connect = dbConnect();
@@ -96,4 +93,49 @@ function addArticle($titre,$img,$text,$date,$autor){
     $stmt->bindParam(':autor', $autor, PDO::PARAM_INT);
     $stmt->execute();
 
+}
+
+function addCom($id_auteur,$comentaire,$date,$id_article){
+    $connect = dbConnect();
+    $stmt = $connect->prepare("INSERT INTO comentaires (id_auteur_com,comentaire,date,`id-article`) VALUE (:id_auteur,:com,:date,:id_article)");
+    $stmt->bindParam(':id_auteur', $id_auteur);
+    $stmt->bindParam(':com', $comentaire);
+    $stmt->bindParam(':date', $date);
+    $stmt->bindParam('id_article', $id_article);
+    $stmt->execute();
+}
+
+function getComByIdArticle($id){
+    $connect = dbConnect();
+    $stmt = $connect->prepare("SELECT * FROM comentaires JOIN auteurs ON comentaires.id_auteur_com = auteurs.auteur_id where comentaires.`id-article`= $id ");
+    $stmt->execute();
+    $com = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $com;
+}
+function getArticlesByIdUser($id){
+    $connect = dbConnect();
+    $stmt = $connect->prepare("SELECT * FROM articles JOIN auteurs ON articles.`id-auteur`= auteurs.auteur_id WHERE auteurs.auteur_id = $id");
+    $stmt->execute();
+    $art = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $art;
+}
+
+function modifyArticleById($titre,$img,$text,$date,$id_article){
+    $connect = dbConnect();
+    $stmt = $connect->prepare("UPDATE articles SET titre=:titre, image=:img, text=:text, date=:date Where articles.article_id = $id_article");
+    $stmt->bindParam(':titre',$titre);
+    $stmt->bindParam(':img',$img);
+    $stmt->bindParam('text', $text);
+    $stmt->bindParam(':date',$date);
+    $stmt->execute();
+
+}
+
+function modifyArticleByIdWithOutImg($titre,$text,$date,$id_article){
+    $connect = dbConnect();
+    $stmt = $connect->prepare("UPDATE articles SET titre=:titre, text=:text, date=:date Where articles.article_id = $id_article");
+    $stmt->bindParam(':titre',$titre);
+    $stmt->bindParam('text', $text);
+    $stmt->bindParam(':date',$date);
+    $stmt->execute();
 }

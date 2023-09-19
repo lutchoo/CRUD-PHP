@@ -8,10 +8,21 @@ if(isset($_GET['id'])&& !empty($_GET['id'])){
     //var_dump($id);
 }
 $article = getArticleById($id);
+$com = getComByIdArticle($id);
 //var_dump($article);
-?>
 
+if(isset($_POST)&& !empty($_POST)){
+    $id_auteur = $_SESSION['user_id'];
+    $comentaire = $_POST['comentaire'];
+    $date = date('Y-m-d');
+    $id_article = $id;
+    addCom($id_auteur,$comentaire,$date,$id_article);
+    header("Location:detail.php?id=$id");
+}
+
+?>
 <div>
+<!-- -------------afficher un article en detail grace a son id --------------------  -->
 <?php foreach($article as $a) {?>
         <article>
             <h2><?= htmlspecialchars($a['titre']) ?></h2>
@@ -20,12 +31,26 @@ $article = getArticleById($id);
             <p>ECRIT LE :<?= htmlspecialchars(date_format (new DateTime($a['date']),"d/m/Y" ))?></p>
             <p>AUTEUR : <?=htmlspecialchars($a['name']) ?></p>
         </article>
-
 <?php } ?>
-
 </div>
-
-
+<!-- -----------------si l'utilisateur est connecter alors il peut ajouter un commentaire-----------------------  -->
+<?php if(isset($_SESSION) && !empty($_SESSION)){ ?>
+    <form action="#" method ="POST">
+    <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Commentaire</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name='comentaire'></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">ajouter </button>
+    </form>
+<?php } ?>
+<!-- ---------------aficher les comentaire de larticle--------------------------  -->
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <?php foreach($com as $c){;?>
+    <li class="list-group-item"><?= htmlspecialchars($c['comentaire'])?><p><?= htmlspecialchars($c['date'] . " " . $c['name']) ?></p></li>
+    <?php }?>
+  </ul>
+</div>
 
 
 

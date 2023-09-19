@@ -17,16 +17,14 @@ header{
     height: 100px;
     top: 0;
     left: 0;
-    border-bottom: 4px solid #4D03A6;
+    border-bottom: 4px solid #8242f1;
     background-color: #0a090d;
     margin-bottom: 100px !important;
 }
 
 #logo img{
     float: left;
-    width: 100px;
-    height: 100px;
-    padding-left: 50px;
+    height: 95px;
 }
 
 nav{

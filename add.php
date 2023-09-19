@@ -8,32 +8,24 @@ if(isset($_POST) && !empty($_POST)){
     $autor = $_SESSION['user_id'];
     $titre = $_POST['titre'];
     $text = $_POST['description'];
-    $date = $date = date('Y-m-d');
+    $date = date('Y-m-d');
     var_dump($date);
-
+//  ----------------gestion du telechargement de l'image---------------------
     if(isset($_FILES['img']) && $_FILES['img']['error'] === 0) {
-        $img = $_FILES['img']['name']; // Nom du fichier téléchargé
-        $img_tmp = $_FILES['img']['tmp_name']; // Emplacement temporaire du fichier
-        
-         // Générez un identifiant unique
+        $img = $_FILES['img']['name'];
+        $img_tmp = $_FILES['img']['tmp_name'];
         $unique_id = uniqid();
-
-        // Obtenez l'extension du fichier téléchargé
         $file_extension = pathinfo($img, PATHINFO_EXTENSION);
-
-        // Construisez le nouveau nom de fichier en ajoutant l'identifiant unique
         $new_img_name = $unique_id . '.' . $file_extension;
-        // Déplacez le fichier téléchargé vers un emplacement permanent (par exemple, dans le dossier des images de votre site)
         move_uploaded_file($img_tmp, 'images/'. $new_img_name );
-        
-    addArticle($titre,$new_img_name,$text,$date,$autor);
+        addArticle($titre,$new_img_name,$text,$date,$autor);
+        header("Location:mes_articles.php?message=l'article a ete correctement ajouter &color=success");
 }else{
     header("Location:add.php?message=erreur telechargement image &color=danger ");
 }
 }
 ?>
-
-
+<!-- ------------------ formulaire pour ajouter un article seulement si lutilisateur est connecter-----------------  -->
 <form action="add.php" method='POST' enctype="multipart/form-data">
 <div>
     <label for="exampleFormControlInput1" class="form-label">Titre</label>

@@ -6,11 +6,13 @@
         <nav>
             <a id="icon-menu" href="#"><img src="img/menu-icon.png" alt=""></a>
             <?php if(isset($_SESSION) && !empty($_SESSION)){ ?>
+                
                 <ul>
                 <li class="deroulant"><a href="">Mon compte</a></li>
                 <li><a href="deco.php">Se Deconnecter</a></li>
                 <ul class="sous" >
                     <li><a href="add.php">ajouter un article</a></li>
+                    <li><a href="mes_articles.php">voir mes articles</a></li>
                 </ul>
                 </ul>
             <?php  }else{?>
@@ -23,7 +25,7 @@
         </nav>
     </div>   
 </header>
-<?php if(isset($_GET)&& !empty($_GET)){ ?>
+<?php if(isset($_GET['message'])&& !empty($_GET)){ ?>
         <div class="alert alert-<?=$_GET['color']?> alert-dismissible fade show" role="alert">
             <strong><?=$_GET["message"]?></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
