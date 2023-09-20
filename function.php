@@ -79,7 +79,7 @@ function getArticleById($id){
     $stmt = $connect->prepare("SELECT * FROM articles JOIN auteurs ON articles.`id-auteur` = auteurs.auteur_id WHERE articles.article_id = :id ");
     $stmt->bindParam(':id',$id);
     $stmt->execute();
-    $oneArticle = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $oneArticle = $stmt->fetch(PDO::FETCH_ASSOC);
     return $oneArticle;
 }
 
@@ -137,5 +137,19 @@ function modifyArticleByIdWithOutImg($titre,$text,$date,$id_article){
     $stmt->bindParam(':titre',$titre);
     $stmt->bindParam('text', $text);
     $stmt->bindParam(':date',$date);
+    $stmt->execute();
+}
+
+function deleteArticle($id){
+    // supresion des commentaires
+    $connect = dbConnect();
+    $stmt = $connect->prepare("DELETE FROM comentaires WHERE `id-article` = :id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+
+    // supression de l'article
+    $connect = dbConnect();
+    $stmt = $connect->prepare("DELETE FROM articles WHERE articles.article_id = :id ");
+    $stmt->bindParam(':id',$id);
     $stmt->execute();
 }

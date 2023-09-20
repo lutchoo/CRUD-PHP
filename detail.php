@@ -21,17 +21,16 @@ if(isset($_POST)&& !empty($_POST)){
 }
 
 ?>
-<div>
+<div class='container'>
 <!-- -------------afficher un article en detail grace a son id --------------------  -->
-<?php foreach($article as $a) {?>
         <article>
-            <h2><?= htmlspecialchars($a['titre']) ?></h2>
-            <img src="images/<?= htmlspecialchars($a['image'])?>" alt="">
-            <p><?= htmlspecialchars($a['text'])?></p>
-            <p>ECRIT LE :<?= htmlspecialchars(date_format (new DateTime($a['date']),"d/m/Y" ))?></p>
-            <p>AUTEUR : <?=htmlspecialchars($a['name']) ?></p>
+            <h2><?= htmlspecialchars($article['titre']) ?></h2>
+            <img src="images/<?= htmlspecialchars($article['image'])?>" alt="">
+            <p><?= htmlspecialchars($article['text'])?></p>
+            <p>ECRIT LE :<?= htmlspecialchars(date_format (new DateTime($article['date']),"d/m/Y" ))?></p>
+            <p>AUTEUR : <?=htmlspecialchars($article['name']) ?></p>
         </article>
-<?php } ?>
+
 </div>
 <!-- -----------------si l'utilisateur est connecter alors il peut ajouter un commentaire-----------------------  -->
 <?php if(isset($_SESSION) && !empty($_SESSION)){ ?>

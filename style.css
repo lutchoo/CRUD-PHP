@@ -1,50 +1,61 @@
 @font-face {
-    font-family: 'generalSans';
+    font-family: 'GeneralSans';
     src: url('font/GeneralSans-Variable.ttf') format('truetype'); /* ou 'woff' selon le type de fichier */
 }
 
 .custom-font {
-    font-family: 'generalSans', sans-serif; /* Utilisez le nom défini dans font-family */
+    font-family: 'GeneralSans', sans-serif; /* Utilisez le nom défini dans font-family */
 }
-body, h1, label, span{
-    font-family: "generalSans", sans-serif;
-}
+html, body, h1, label, span{
+    font-family: "GeneralSans", sans-serif !important;
 
+}
+body, .art{
+    background-color: #0a090d !important ;
+    color: #adabb2 !important;
+    line-height: 2 !important;
+    letter-spacing: .4px;
+
+    
+}
+body h1, h2, h3{
+    font-size: 2rem  !important;
+    color: #ffffff !important;
+
+}
 
 header{
-    font-family: "generalSans" , sans-serif;
+    font-family: "GeneralSans";
+    position: sticky;
     width: 100%;
     height: 100px;
     top: 0;
     left: 0;
-    border-bottom: 4px solid #8242f1;
+    border-bottom: 2px solid #4D03A6;
     background-color: #0a090d;
-    margin-bottom: 100px !important;
+    margin-bottom: 40px;
+    z-index: 10000;
 }
 
 #logo img{
     float: left;
-    height: 95px;
+    width: 100px;
+    height: 100px;
+    padding-left: 50px;
 }
 
 nav{
     display: flex;
     float: right;
-    padding: 15px;
     width: 50%;
+    margin-top: 30px;
 }
-.sous_menu{
-    display: none;
-}
-
 nav ul{
     width: 100%;
 }
 nav ul li {
-    text-align: center;
     display: inline-block;
-    font-size: 18px;
-    width: 30%;
+    font-size: 20px;
     cursor: pointer;
 }
 
@@ -59,15 +70,49 @@ nav ul li a{
     font-weight: 500;
     
 }
+nav ul li a:hover{
+    color: #4D03A6;
+}
 
 #icon-menu{
     height: 40px;
     width: 40px;
     visibility: hidden;
 }
+.deroulant{
+    width: 100%;
+}
+.sous{
+    position: relative;
+    left: -41px;
+    display: none;
+}
+.deroulant:hover .sous{
+    display: block;
+    color: #7a3ee3;
+    background-color: #0a090c;
+}
+.sous li{
+    width: 65%;
+}
 
-@media only screen and (max-width:750px){
-    
+.disconect{
+    float: right;
+    width: 80%;
+}
+span {
+    color: #4D03A6;
+    font-weight: 500;
+}
+button{
+    background-color: #4D03A6;
+    color: #e2e1e5;
+    border-radius: 0px;
+}
+@media only screen and (max-width:650px){
+    header{
+        
+    }
     #container-1 {
         float: left;
         width: 50%;
@@ -85,17 +130,15 @@ nav ul li a{
     }
     nav ul, nav:active ul {
         display:none;
-        position: absolute;
-        padding: 20px;
-        background: white;
-        right: 10px;
-        top: 35px;
-        width: 35%;
+       
+        background: #0a090c;  
        
     }
     nav:hover ul {
         display: block;
-        border-radius: 20px;
+        width: 100%;
+        z-index: 1000000;
+        
     }
     nav li {
         text-align: center;
@@ -108,4 +151,9 @@ nav ul li a{
         background-color: #4D03A6;
     }
 
+    .deroulant{
+        position: absolute;
+        top: 95px;
+        left: 0;
+    }
 }

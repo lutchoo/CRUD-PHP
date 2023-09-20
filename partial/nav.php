@@ -7,14 +7,17 @@
             <a id="icon-menu" href="#"><img src="img/menu-icon.png" alt=""></a>
             <?php if(isset($_SESSION) && !empty($_SESSION)){ ?>
                 
-                <ul>
-                <li class="deroulant"><a href="">Mon compte</a></li>
-                <li><a href="deco.php">Se Deconnecter</a></li>
+                <ul class="deroulant">
+                <li><a href="">Mon compte</a></li>
                 <ul class="sous" >
                     <li><a href="add.php">ajouter un article</a></li>
                     <li><a href="mes_articles.php">voir mes articles</a></li>
                 </ul>
                 </ul>
+                <ul class='disconect'>
+                <li><a href="deco.php">Se Deconnecter</a></li>
+                </ul>
+                
             <?php  }else{?>
                 <ul>
                 <li><a href="signIn.php">Inscription</a></li>
