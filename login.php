@@ -17,13 +17,13 @@ if(isset($_POST) && !empty($_POST)){
 <form action="login.php" method ="POST">
     <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" placeholder="name@example.com" name='email'>
+        <input style='background-color: #adabb2 !important;' type="email" class="form-control" id="email" placeholder="name@example.com" name='email'>
     </div>
     <div>
         <label for="Password" class="form-label">Password</label>
-        <input type="password" id="Password" class="form-control" aria-describedby="passwordHelpBlock" name='password'>
+        <input style='background-color: #adabb2 !important;' type="password" id="Password" class="form-control" aria-describedby="passwordHelpBlock" name='password'>
     </div>
-    <button type="submit" class="btn btn-primary mb-3"><span>Confirm</span> </button>
+    <button type="submit" class=" btn mb-3">Confirm</button>
 </form>
 
 <?php require_once 'partial/footer.php' ?>

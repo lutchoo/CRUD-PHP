@@ -1,6 +1,6 @@
 <header>
     <div id="container-1">
-    <div id="logo"><a href="index.php"><img src="img/Black and White Minimalist Modern Clean Technology Logo .png" alt=""></a></div>
+    <div id="logo"><a href="index.php"><img src="img/Black_and_White_Minimalist_Modern_Clean_Technology_Logo_.png" alt=""></a></div>
     </div>
     <div id="container-2"> 
         <nav>

@@ -2,9 +2,12 @@
 require_once 'partial/header.php' ;
 require_once 'partial/nav.php';
 require_once 'function.php';
-$article = getArticles();
+if(isset($_GET)&& !empty($_GET)){
+    $id = $_GET['id'];
+}
+$art = getArticleByIdCat($id);
 $cat=getCat();
-//var_dump($article);
+//var_dump($art);
 ?>
 
 
@@ -22,21 +25,23 @@ $cat=getCat();
 <main class='container'>
 <div class="row" style='margin-top:70px;'>
     <img src="https://assets-global.website-files.com/637359c81e22b715cec245ad/6464a7ec8c8fd22869e80364_home-hero-new-bg1.svg" alt="" style='position:absolute; left:0; top:20px;'>
-    <?php foreach($article as $a) { ?>
+    <?php foreach($art as $a) {  ?>
     <div  class="card m-5 art " style="width: 20rem; -webkit-box-shadow: 0px 0px 5px 4px #4D03A6;
     -moz-box-shadow: 0px 0px 5px 4px #4D03A6;
     box-shadow: 0px 0px 5px 4px #4D03A6; ">
     <img src="images/<?= htmlspecialchars($a['image'])?>" class="card-img-top"style='height:40%' alt="..." >
     <h3 class="card-title"><?= htmlspecialchars($a['titre'])?></h3>
-    <p>PUBLIER LE : <span><?= htmlspecialchars(date_format(new DateTime($a['date']),"d/m/Y" ))?></span></p>
-    <p>AUTEUR : <span><?=htmlspecialchars($a['name'])?></span></p>
+    <p>PUBLIER LE : <span><?= date_format(new DateTime($a['date']),"d/m/Y" )?></span></p>
+    <p>AUTEUR : <span><?=$a['name']?></span></p>
     <a href="detail.php?id=<?=$a['article_id']?>"><button class='btn'>Plus de detail</button></a>
     </div>
     <?php } ?>
     </div>
 </main>
-       
+
+ 
+
+
+
+
 <?php require_once 'partial/footer.php' ?>
-
-
-

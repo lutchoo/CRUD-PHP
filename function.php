@@ -83,7 +83,7 @@ function getArticleById($id){
     return $oneArticle;
 }
 
-function addArticle($titre,$img,$text,$date,$autor){
+function addArticle($titre,$img,$text,$date,$autor,$cat){
     $connect = dbConnect();
     $stmt = $connect->prepare("INSERT INTO articles (titre,image,text,date,`id-auteur`) VALUE (:titre, :img, :text, :date, :autor)");
     $stmt->bindParam(':titre', $titre, PDO::PARAM_STR);
@@ -92,6 +92,15 @@ function addArticle($titre,$img,$text,$date,$autor){
     $stmt->bindParam(':date', $date, PDO::PARAM_STR);
     $stmt->bindParam(':autor', $autor, PDO::PARAM_INT);
     $stmt->execute();
+    $articleId = $connect->lastInsertId();
+
+        foreach($cat as $c){
+        $stmt = $connect->prepare("INSERT INTO article_cat (id_cat, id_art) VALUES (:id_cat, :id_art)");
+        $stmt->bindParam(':id_cat', $c, PDO::PARAM_INT);
+        $stmt->bindParam(':id_art', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+        }
+        
 
 }
 
@@ -147,9 +156,62 @@ function deleteArticle($id){
     $stmt->bindParam(':id', $id);
     $stmt->execute();
 
+    //supresion categorie
+    $connect = dbConnect();
+    $stmt = $connect->prepare("DELETE FROM article_cat WHERE article_cat.id_art = :id ");
+    $stmt->bindParam(':id',$id);
+    $stmt->execute();
+
+    //recuperation image
+
+    $connect = dbConnect();
+    $stmt= $connect->prepare("SELECT image FROM articles WHERE articles.article_id = :id");
+    $stmt->bindParam(':id',$id);
+    $stmt->execute();
+    $img = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
     // supression de l'article
     $connect = dbConnect();
     $stmt = $connect->prepare("DELETE FROM articles WHERE articles.article_id = :id ");
     $stmt->bindParam(':id',$id);
     $stmt->execute();
+    
+    //supression image
+    if($img && isset($img['image'])){ 
+        $imagePath = ("images/" . $img['image']);
+        if(file_exists($imagePath)){
+            unlink($imagePath);
+        }
+    }
+
 }
+
+function getCat(){
+    $connect = dbConnect();
+    $stmt = $connect->prepare("SELECT * FROM categories");
+    $stmt->execute();
+    $cat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $cat;
+}
+
+function addCat(){
+    $connect = dbConnect();
+    $stmt = $connect->prepare("INSERT INTO article_cat (id_cat,id_art) VALUE(:$id_cat, :id_art) ");
+    $stmt->bindParam(':id_cat',$id_cat);
+    $stmt->bindParam(':id_art', $id_art);
+    $stmt->execute();
+
+}
+
+
+function getArticleByIdCat($id){
+    $connect = dbConnect();
+    $stmt = $connect->prepare('SELECT * FROM articles JOIN article_cat ON article_cat.id_art = articles.article_id JOIN auteurs ON articles.`id-auteur` = auteurs.auteur_id WHERE article_cat.id_cat = :id');
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $art = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $art;
+
+}
+

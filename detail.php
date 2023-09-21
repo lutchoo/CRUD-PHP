@@ -21,17 +21,20 @@ if(isset($_POST)&& !empty($_POST)){
 }
 
 ?>
-<div class='container'>
+<div class='container' >
 <!-- -------------afficher un article en detail grace a son id --------------------  -->
         <article>
             <h2><?= htmlspecialchars($article['titre']) ?></h2>
             <img src="images/<?= htmlspecialchars($article['image'])?>" alt="">
-            <p><?= htmlspecialchars($article['text'])?></p>
+            <p><?= $article['text']?></p>
             <p>ECRIT LE :<?= htmlspecialchars(date_format (new DateTime($article['date']),"d/m/Y" ))?></p>
             <p>AUTEUR : <?=htmlspecialchars($article['name']) ?></p>
         </article>
 
 </div>
+<div class='container' style='-webkit-box-shadow: 0px 0px 5px 4px #adabb2;
+    -moz-box-shadow: 0px 0px 5px 4px #adabb2;
+    box-shadow: 0px 0px 5px 4px #adabb2;'>
 <!-- -----------------si l'utilisateur est connecter alors il peut ajouter un commentaire-----------------------  -->
 <?php if(isset($_SESSION) && !empty($_SESSION)){ ?>
     <form action="#" method ="POST">
@@ -39,16 +42,19 @@ if(isset($_POST)&& !empty($_POST)){
     <label for="exampleFormControlTextarea1" class="form-label">Commentaire</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name='comentaire'></textarea>
     </div>
-    <button type="submit" class="btn btn-primary mb-3">ajouter </button>
+    <button type="submit" class="btn mb-3">Ajouter un comentaire</button>
     </form>
 <?php } ?>
+</div>
 <!-- ---------------aficher les comentaire de larticle--------------------------  -->
+<div class='container'>
 <div class="card" style="width: 18rem;">
   <ul class="list-group list-group-flush">
     <?php foreach($com as $c){;?>
     <li class="list-group-item"><?= htmlspecialchars($c['comentaire'])?><p><?= htmlspecialchars($c['date'] . " " . $c['name']) ?></p></li>
     <?php }?>
   </ul>
+</div>
 </div>
 
 

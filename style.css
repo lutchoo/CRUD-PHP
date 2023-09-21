@@ -11,17 +11,20 @@ html, body, h1, label, span{
 
 }
 body, .art{
-    background-color: #0a090d !important ;
+    background-color: #121212 !important ;
     color: #adabb2 !important;
-    line-height: 2 !important;
-    letter-spacing: .4px;
-
-    
+    line-height: 1.2 !important;
+    letter-spacing: .9px !important;
+    font-weight: 400 !important;
+    font-size: 1.5rem !important;   
 }
+#titre:hover{
+    color: #9332d1 !important;
+}
+
 body h1, h2, h3{
     font-size: 2rem  !important;
     color: #ffffff !important;
-
 }
 
 header{
@@ -31,16 +34,16 @@ header{
     height: 100px;
     top: 0;
     left: 0;
-    border-bottom: 2px solid #4D03A6;
-    background-color: #0a090d;
+    background-image:linear-gradient(90deg,#a626c1 0,#9b2dc9 26%,#9332d1 51%,#8539db 76%,#7c3ee3) !important;
+    background-color: #242526 ;
     margin-bottom: 40px;
     z-index: 10000;
 }
 
 #logo img{
     float: left;
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 90px;
     padding-left: 50px;
 }
 
@@ -90,7 +93,8 @@ nav ul li a:hover{
 .deroulant:hover .sous{
     display: block;
     color: #7a3ee3;
-    background-color: #0a090c;
+    background-color: #212026;
+    width: 60%;
 }
 .sous li{
     width: 65%;
@@ -101,13 +105,37 @@ nav ul li a:hover{
     width: 80%;
 }
 span {
-    color: #4D03A6;
+    color: #7c3ee3;
     font-weight: 500;
 }
+span:hover{
+   color: #9332d1;
+   font-weight: 900;
+}
 button{
-    background-color: #4D03A6;
-    color: #e2e1e5;
+    background-color: #7c3ee3 !important;
+    color:  !important;
     border-radius: 0px;
+}
+button:hover{
+    background-color: #9332d1 !important;
+    color: #e2e1e5  !important;
+    border-radius: 0px;
+}
+
+.art .card-body, .card-title{
+    height: 150px;
+    overflow: hidden;
+}
+aside a{
+    color: #e2e1e5;
+    text-decoration: none;
+    
+}
+
+aside a:hover{
+    color: #9332d1 ;
+    font-weight: 500;
 }
 @media only screen and (max-width:650px){
     header{

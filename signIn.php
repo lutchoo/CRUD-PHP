@@ -28,7 +28,7 @@ if(isset($_POST)&& !empty($_POST)){
         <label for="Password" class="form-label">Password</label>
         <input type="password" id="Password" class="form-control" aria-describedby="passwordHelpBlock" name='password'>
     </div>
-    <button type="submit" class="btn btn-primary mb-3">Confirm </button>
+    <button type="submit" class="btn mb-3">Confirm </button>
 </form>
 </main>
 
